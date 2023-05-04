@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import BookList from './components/BookList/BookList';
+import BookForm from './components/BookForm/BookForm';
+import { updateBooks } from './redux/booksRedux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
-function App() {
+
+const App = () => {
+  const dispatch = useDispatch();
+  const fetchBooks = () => {
+    fetch('http://localhost:3131/api/books')
+      .then(res => res.json())
+      .then(books => dispatch(updateBooks(books)));
+  };
+
+  useEffect(fetchBooks, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Books App</h1>
+      <BookForm />
+      <BookList />
     </div>
   );
 }
