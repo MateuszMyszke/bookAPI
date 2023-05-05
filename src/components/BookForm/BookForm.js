@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addBookRequest } from "../../redux/booksRedux";
 
 const BookForm = () => {
   const dispatch = useDispatch();
@@ -8,10 +9,9 @@ const BookForm = () => {
 
   const handleSubmit = e =>{
     e.preventDefault();
-    dispatch({type: 'ADD_BOOK', payload: { title, author }});
+    dispatch(addBookRequest({ title, author }));
     setTitle('');
     setAuthor('');
-    console.log('tak');
   }
 
   return(

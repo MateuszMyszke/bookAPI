@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { removeBookRequest } from "../../redux/booksRedux";
 
 const BookList = () => {
   const books = useSelector(state => state.books);
@@ -8,7 +9,7 @@ const BookList = () => {
 
   return(
     <ul>
-      {books.map(book => <li key={book.id}> {book.title} by {book.author} <button onClick={() => dispatch({type: 'REMOVE_BOOK', payload: book.id })}>Remove</button></li>)}
+      {books.map(book => <li key={book.id}> {book.title} by {book.author} <button onClick={() => dispatch(removeBookRequest(book.id))}>Remove</button></li>)}
     </ul>
   );
 };
