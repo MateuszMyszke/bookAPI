@@ -35,17 +35,17 @@ export const addBookRequest = (newBook) => {
   }
 }
 
-export const removeBookRequest = (book) => {
+export const removeBookRequest = (removeID) => {
   return (dispatch) => {
     const options = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(book),
+      body: JSON.stringify(removeID),
     };
-    fetch('http://localhost:3131/books', options)
-      .then(() => dispatch(removeBook(book)))
+    fetch('http://localhost:3131/books/' + removeID , options)
+      .then(() => dispatch(removeBook(removeID)))
   }
 }
 
